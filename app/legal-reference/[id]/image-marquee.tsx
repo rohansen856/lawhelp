@@ -29,6 +29,21 @@ export function ImageMarquee({ images }: ImageMarqueeProps) {
         })
     }, [controls])
 
+    images = [
+        {
+            url: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800",
+            alt: "Law books and gavel",
+        },
+        {
+            url: "https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=800",
+            alt: "Courthouse",
+        },
+        {
+            url: "https://images.unsplash.com/photo-1593115057322-e94b77572f20?w=800",
+            alt: "Legal documents",
+        },
+    ]
+
     return (
         <div className="relative w-full overflow-hidden py-12">
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />

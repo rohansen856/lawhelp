@@ -1,4 +1,4 @@
-CREATE TABLE Articles (
+CREATE TABLE IF NOT EXISTS Articles (
     id INT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
@@ -17,7 +17,7 @@ INSERT INTO Articles (id, title, description, category, badges, icon) VALUES
 
 
 
-CREATE TABLE article_details (
+CREATE TABLE IF NOT EXISTS article_details (
     id VARCHAR(255) PRIMARY KEY, -- Unique identifier for the article
     title VARCHAR(255) NOT NULL, -- Title of the article
     short_description TEXT, -- Short description of the article

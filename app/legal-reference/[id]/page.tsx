@@ -5,46 +5,36 @@ import { Article, ArticleHeader } from "./article-header"
 import { ImageMarquee } from "./image-marquee"
 import { ContentRenderer } from "./content-renderer"
 import { Badge } from "@/components/ui/badge"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
-const mockArticle = {
-    id: "1",
-    title: "Understanding Section 302 IPC: A Comprehensive Analysis",
-    shortDescription:
-        "An in-depth look at the provisions, interpretations, and implications of Section 302 of the Indian Penal Code dealing with murder.",
-    content:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, corrupti esse doloribus fuga eligendi illum libero ratione voluptate nesciunt eveniet rerum impedit non est harum nulla error, molestiae sapiente minima sint odit mollitia id corporis recusandae velit? Necessitatibus rerum cum eveniet fuga id tenetur nesciunt, pariatur facere a nobis. Aut rerum quisquam vitae iure corrupti accusantium fuga ullam ratione natus cumque, vel exercitationem consectetur dolorem quo esse deleniti magni voluptas. Corporis sequi aut doloribus. Eligendi necessitatibus ut, animi veniam expedita quo voluptate asperiores optio placeat recusandae facilis aspernatur consectetur fugit, nisi aut facere minima rem molestiae officiis doloribus sapiente! Iusto ad ab voluptatum culpa tempora voluptate eos vero sint perspiciatis magnam, inventore necessitatibus asperiores repellat, voluptatibus eum provident, minus debitis in hic cupiditate incidunt delectus beatae accusamus numquam. Corrupti facilis minima natus ipsum, esse hic officia quia nihil aut tempora fugiat quis odit, doloribus ipsam, eaque in aperiam quae possimus assumenda eligendi velit corporis. Laudantium maiores voluptas, et corporis qui quaerat sunt illum, sapiente porro reiciendis quisquam? Delectus facilis, placeat maxime harum quo earum quae autem necessitatibus tempore id ullam quam dolore fuga minus similique animi voluptates nesciunt maiores beatae alias doloremque laudantium? Modi pariatur architecto dignissimos facere ratione accusamus!",
-    author: {
-        name: "Adv. Rajesh Kumar",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-        role: "Senior Criminal Lawyer",
-    },
-    publishedAt: "2024-02-20",
-    readingTime: "8 min read",
-    categories: ["Criminal Law", "IPC", "Legal Analysis"],
-    images: [
-        {
-            url: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800",
-            alt: "Law books and gavel",
-        },
-        {
-            url: "https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=800",
-            alt: "Courthouse",
-        },
-        {
-            url: "https://images.unsplash.com/photo-1593115057322-e94b77572f20?w=800",
-            alt: "Legal documents",
-        },
-    ],
-    tags: ["Murder", "Criminal Justice", "Supreme Court", "Case Law"],
-}
-
-export default function ArticlePage() {
+export default function ArticlePage({ params }: { params: { id: string } }) {
     const { scrollYProgress } = useScroll()
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
         damping: 30,
         restDelta: 0.001,
     })
+
+    const [mockArticle, setMockArticle] = useState<Article | null>(null)
+
+    async function getArticleById() {
+        try {
+            const res = await axios.get<{ data: Article }>(
+                `http://localhost:3001/api/articles/${params.id}`
+            )
+            setMockArticle(res.data.data)
+            console.log(mockArticle)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getArticleById()
+    }, [])
+
+    if (!mockArticle) return null
 
     return (
         <div className="min-h-screen bg-background">

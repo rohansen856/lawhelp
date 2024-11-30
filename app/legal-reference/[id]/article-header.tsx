@@ -8,13 +8,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export interface Article {
     id: string
     title: string
-    shortDescription: string
+    short_description: string
     content: string
-    author: {
-        name: string
-        avatar: string
-        role: string
-    }
+    author_name: string
+    author_avatar: string
+    author_role: string
     publishedAt: string
     readingTime: string
     categories: string[]
@@ -68,7 +66,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
             >
-                {article.shortDescription}
+                {article.short_description}
             </motion.p>
 
             <motion.div
@@ -97,18 +95,18 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
                 <div className="flex items-center gap-2">
                     <Avatar className="h-10 w-10">
                         <AvatarImage
-                            src={article.author.avatar}
-                            alt={article.author.name}
+                            src={article.author_avatar}
+                            alt={article.author_name}
                         />
                         <AvatarFallback>
-                            {article.author.name[0]}
+                            {article.author_name[0]}
                         </AvatarFallback>
                     </Avatar>
                     <div>
                         <p className="font-medium text-foreground">
-                            {article.author.name}
+                            {article.author_name}
                         </p>
-                        <p className="text-xs">{article.author.role}</p>
+                        <p className="text-xs">{article.author_role}</p>
                     </div>
                 </div>
 
