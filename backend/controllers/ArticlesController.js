@@ -32,11 +32,12 @@ const getItemById = async (req, res) => {
 }
 
 const createItem = async (req, res) => {
-    const { title, description, category, badges, icon } = req.body
+    const { id, title, description, category, badges, icon } = req.body
+    console.log(req.body)
     try {
         const result = await pool.query(
-            "INSERT INTO Articles (title, description, category, badges, icon) VALUES (?, ?, ?, ?, ?)",
-            [title, description, category, JSON.stringify(badges), icon]
+            "INSERT INTO Articles (id, title, description, category, badges, icon) VALUES (?, ?, ?, ?, ?, ?)",
+            [id, title, description, category, JSON.stringify(badges), icon]
         )
         res.status(201).json({
             id: result[0].insertId,
@@ -47,6 +48,7 @@ const createItem = async (req, res) => {
             icon,
         })
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             error: "Database insert failed",
             details: error.message,

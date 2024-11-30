@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import {
     Card,
@@ -14,7 +15,15 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Scale, BookOpen, Building2, Users2, Gavel } from "lucide-react"
+import {
+    Scale,
+    BookOpen,
+    Building2,
+    Users2,
+    Gavel,
+    Delete,
+    Trash,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import axios from "axios"
@@ -39,7 +48,7 @@ export function LegalList({
     selectedBadges,
 }: LegalListProps) {
     const [legalItems, setLegalItems] = useState<any[]>([])
-
+    const router = useRouter()
     const filteredItems = legalItems.filter((item) => {
         const matchesSearch = searchQuery
             ? item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -70,6 +79,17 @@ export function LegalList({
         getAllArticles()
     }, [])
 
+    async function deleteArticle(id: string) {
+        try {
+            await axios.delete(`http://localhost:3001/api/legal-items/${id}`)
+            alert("Article deleted successfully!")
+        } catch (error) {
+            console.log(error)
+        } finally {
+            router.refresh()
+        }
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -89,76 +109,71 @@ export function LegalList({
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredItems.map((item, index) => (
-                        <Link
-                            href={`/legal-reference/${item.id}`}
+                        <motion.div
                             key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
                         >
-                            <motion.div
-                                key={item.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                            >
-                                <Card className="group relative overflow-hidden hover:shadow-lg transition-shadow">
-                                    <div
-                                        className={cn(
-                                            "absolute top-0 left-0 w-1 h-full",
-                                            categoryColors[
-                                                item.category as keyof typeof categoryColors
-                                            ]
-                                        )}
-                                    />
-                                    <CardHeader>
-                                        <div className="flex items-center justify-between mb-2">
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    <TooltipTrigger>
-                                                        <item.icon className="h-6 w-6 text-primary" />
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        <p>
-                                                            {item.category
-                                                                .charAt(0)
-                                                                .toUpperCase() +
-                                                                item.category.slice(
-                                                                    1
-                                                                )}{" "}
-                                                            Law
-                                                        </p>
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
-                                            <div className="flex gap-2">
-                                                {item.badges.map(
-                                                    (badge: string) => (
-                                                        <Badge
-                                                            key={badge}
-                                                            variant={
-                                                                badge ===
-                                                                "urgent"
-                                                                    ? "destructive"
-                                                                    : "default"
-                                                            }
-                                                        >
-                                                            {badge
-                                                                .charAt(0)
-                                                                .toUpperCase() +
-                                                                badge.slice(1)}
-                                                        </Badge>
-                                                    )
-                                                )}
-                                            </div>
+                            <Card className="group relative overflow-hidden hover:shadow-lg transition-shadow">
+                                <div
+                                    className={cn(
+                                        "absolute top-0 left-0 w-1 h-full",
+                                        categoryColors[
+                                            item.category as keyof typeof categoryColors
+                                        ]
+                                    )}
+                                />
+                                <CardHeader>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flex gap-2">
+                                            {item.badges.map(
+                                                (badge: string) => (
+                                                    <Badge
+                                                        key={badge}
+                                                        variant={
+                                                            badge === "urgent"
+                                                                ? "destructive"
+                                                                : "default"
+                                                        }
+                                                    >
+                                                        {badge
+                                                            .charAt(0)
+                                                            .toUpperCase() +
+                                                            badge.slice(1)}
+                                                    </Badge>
+                                                )
+                                            )}
                                         </div>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger
+                                                    onClick={() =>
+                                                        deleteArticle(item.id)
+                                                    }
+                                                >
+                                                    <Trash className="h-6 w-6 text-destructive" />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Delete Article</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    </div>
+                                    <Link
+                                        href={`/legal-reference/${item.id}`}
+                                        key={item.id}
+                                    >
                                         <CardTitle className="group-hover:text-primary transition-colors">
                                             {item.title}
                                         </CardTitle>
-                                        <CardDescription>
-                                            {item.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                </Card>
-                            </motion.div>
-                        </Link>
+                                    </Link>
+                                    <CardDescription>
+                                        {item.description}
+                                    </CardDescription>
+                                </CardHeader>
+                            </Card>
+                        </motion.div>
                     ))}
                 </div>
             )}

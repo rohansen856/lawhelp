@@ -5,7 +5,6 @@ import { LegalList } from "@/app/legal-reference/items"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Navbar } from "@/components/layout/navbar"
-import axios from "axios"
 
 export default function LegalReferencePage() {
     const [searchQuery, setSearchQuery] = useState("")
