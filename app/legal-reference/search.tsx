@@ -143,14 +143,13 @@ export function LegalSearch({
                                         {badges.map((badge) => (
                                             <Badge
                                                 key={badge.id}
-                                                variant={
+                                                variant={"outline"}
+                                                className={cn(
+                                                    "cursor-pointer",
                                                     selectedBadges.includes(
                                                         badge.id
-                                                    )
-                                                        ? badge.color
-                                                        : "outline"
-                                                }
-                                                className="cursor-pointer"
+                                                    ) && `bg-${badge.color}`
+                                                )}
                                                 onClick={() =>
                                                     handleBadgeToggle(badge.id)
                                                 }

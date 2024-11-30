@@ -1,7 +1,7 @@
 "use client"
 
-import { LegalSearch } from "@/components/legal-reference/search"
-import { LegalList } from "@/components/legal-reference/items"
+import { LegalSearch } from "@/app/legal-reference/search"
+import { LegalList } from "@/app/legal-reference/items"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
