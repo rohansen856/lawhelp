@@ -28,7 +28,7 @@ export function SectionCard({ section }: { section: IPCSection }) {
             whileHover={{ y: -5 }}
             transition={{ duration: 0.3 }}
         >
-            <Card className="h-full backdrop-blur-sm bg-background/50 border-primary/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5">
+            <Card className="h-full backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5 bg-secondary/10">
                 <CardHeader>
                     <div className="flex items-center justify-between">
                         <Badge
@@ -54,7 +54,7 @@ export function SectionCard({ section }: { section: IPCSection }) {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <div className="bg-destructive/5 p-4 rounded-lg">
+                        <div className="bg-destructive/10 p-4 rounded-lg">
                             <div className="flex items-center gap-2 text-sm font-semibold mb-2 text-destructive">
                                 <AlertTriangle className="w-4 h-4" />
                                 <h4>Punishment:</h4>

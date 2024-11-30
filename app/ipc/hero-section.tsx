@@ -58,11 +58,11 @@ export function HeroSection() {
                     transition={{ delay: 0.8 }}
                 >
                     <div className="relative">
-                        <Search className="absolute left-4 top-3.5 h-5 w-5 text-muted-foreground" />
+                        <Search className="absolute left-4 top-4 h-6 w-6 text-muted-foreground z-20" />
                         <Input
                             type="search"
                             placeholder="Search IPC sections, keywords, or descriptions..."
-                            className="w-full pl-12 pr-4 h-14 text-lg rounded-full border-2 focus:ring-2 focus:ring-primary/20 bg-background/80 backdrop-blur-sm"
+                            className="z-10 w-full pl-12 pr-4 h-14 text-lg rounded-full border-2 focus:ring-2 focus:ring-primary/20 bg-background/80 backdrop-blur-sm"
                         />
                     </div>
                 </motion.div>
