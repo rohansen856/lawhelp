@@ -17,57 +17,13 @@ import {
 import { Scale, BookOpen, Building2, Users2, Gavel } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-
+import axios from "axios"
+import { useEffect, useState } from "react"
 interface LegalListProps {
     searchQuery: string
     selectedCategories: string[]
     selectedBadges: string[]
 }
-
-const legalItems = [
-    {
-        id: 1,
-        title: "Property Rights and Ownership",
-        description:
-            "Comprehensive guide to property ownership, transfer, and rights.",
-        category: "property",
-        badges: ["recent"],
-        icon: Building2,
-    },
-    {
-        id: 2,
-        title: "Criminal Procedure Code",
-        description:
-            "Detailed overview of criminal procedures and regulations.",
-        category: "criminal",
-        badges: ["urgent"],
-        icon: Gavel,
-    },
-    {
-        id: 3,
-        title: "Civil Rights Protection",
-        description: "Understanding civil rights and legal protections.",
-        category: "civil",
-        badges: ["pending"],
-        icon: Scale,
-    },
-    {
-        id: 4,
-        title: "Constitutional Amendments",
-        description: "Latest constitutional amendments and their implications.",
-        category: "constitutional",
-        badges: ["recent", "urgent"],
-        icon: BookOpen,
-    },
-    {
-        id: 5,
-        title: "Business Regulations",
-        description: "Current business laws and regulatory requirements.",
-        category: "business",
-        badges: ["recent"],
-        icon: Users2,
-    },
-]
 
 const categoryColors = {
     property: "bg-blue-500",
@@ -82,6 +38,8 @@ export function LegalList({
     selectedCategories,
     selectedBadges,
 }: LegalListProps) {
+    const [legalItems, setLegalItems] = useState<any[]>([])
+
     const filteredItems = legalItems.filter((item) => {
         const matchesSearch = searchQuery
             ? item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -93,10 +51,24 @@ export function LegalList({
             selectedCategories.includes(item.category)
         const matchesBadges =
             selectedBadges.length === 0 ||
-            item.badges.some((badge) => selectedBadges.includes(badge))
+            item.badges.some((badge: string) => selectedBadges.includes(badge))
 
         return matchesSearch && matchesCategory && matchesBadges
     })
+
+    async function getAllArticles() {
+        try {
+            const res = await axios.get("http://localhost:3001/api/legal-items")
+            console.log(res)
+            setLegalItems(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getAllArticles()
+    }, [])
 
     return (
         <motion.div
@@ -157,21 +129,24 @@ export function LegalList({
                                                 </Tooltip>
                                             </TooltipProvider>
                                             <div className="flex gap-2">
-                                                {item.badges.map((badge) => (
-                                                    <Badge
-                                                        key={badge}
-                                                        variant={
-                                                            badge === "urgent"
-                                                                ? "destructive"
-                                                                : "default"
-                                                        }
-                                                    >
-                                                        {badge
-                                                            .charAt(0)
-                                                            .toUpperCase() +
-                                                            badge.slice(1)}
-                                                    </Badge>
-                                                ))}
+                                                {item.badges.map(
+                                                    (badge: string) => (
+                                                        <Badge
+                                                            key={badge}
+                                                            variant={
+                                                                badge ===
+                                                                "urgent"
+                                                                    ? "destructive"
+                                                                    : "default"
+                                                            }
+                                                        >
+                                                            {badge
+                                                                .charAt(0)
+                                                                .toUpperCase() +
+                                                                badge.slice(1)}
+                                                        </Badge>
+                                                    )
+                                                )}
                                             </div>
                                         </div>
                                         <CardTitle className="group-hover:text-primary transition-colors">
