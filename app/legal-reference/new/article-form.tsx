@@ -13,10 +13,6 @@ export const articleSchema = z.object({
         .min(1, "Category is required")
         .max(50, "Category must be 50 characters or less"),
     badges: z.array(z.string()).min(1, "At least one badge is required"),
-    icon: z
-        .string()
-        .min(1, "Icon is required")
-        .max(255, "Icon must be 255 characters or less"),
 })
 
 export type ArticleFormData = z.infer<typeof articleSchema>
@@ -31,6 +27,7 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Moon, Sun, Plus, Minus } from "lucide-react"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
 export default function ArticleForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -56,7 +53,7 @@ export default function ArticleForm() {
         setIsDarkMode(!isDarkMode)
         document.documentElement.classList.toggle("dark")
     }
-
+    const router = useRouter()
     const onSubmit = async (data: ArticleFormData) => {
         setIsSubmitting(true)
         setSubmitMessage(null)
@@ -65,9 +62,10 @@ export default function ArticleForm() {
             console.log(data)
             const res = await axios.post(
                 "http://localhost:3001/api/legal-items",
-                data
+                { ...data, icon: "icon" }
             )
             alert("Article added successfully!")
+            router.push("/legal-reference")
         } catch (error) {
             setSubmitMessage({
                 type: "error",
@@ -152,20 +150,6 @@ export default function ArticleForm() {
                     <p className="text-destructive">
                         {errors.category.message}
                     </p>
-                )}
-            </div>
-
-            <div>
-                <Label htmlFor="icon" className="text-primary">
-                    Icon
-                </Label>
-                <Input
-                    id="icon"
-                    {...register("icon")}
-                    className="bg-background text-primary"
-                />
-                {errors.icon && (
-                    <p className="text-destructive">{errors.icon.message}</p>
                 )}
             </div>
 

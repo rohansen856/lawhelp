@@ -4,10 +4,11 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Menu, X, Scale } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 import { FloatingNavbar } from "@/components/ui/floating-navbar"
 import { AnimatedText } from "@/components/ui/animated-text"
+import { cn } from "@/lib/utils"
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -44,7 +45,12 @@ export function Navbar() {
                             </Link>
                         ))}
                         <ThemeToggle />
-                        <Button>Free Consultation</Button>
+                        <Link
+                            href={"/legal-reference/new"}
+                            className={cn(buttonVariants())}
+                        >
+                            New Article
+                        </Link>
                     </div>
 
                     {/* Mobile Navigation Button */}
@@ -85,9 +91,14 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <div className="px-3 py-2">
-                                <Button className="w-full">
-                                    Free Consultation
-                                </Button>
+                                <Link
+                                    href={"/legal-reference/new"}
+                                    className={cn(
+                                        buttonVariants({ className: "w-full" })
+                                    )}
+                                >
+                                    New Article
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
