@@ -42,8 +42,8 @@ export function Footer() {
               <span className="font-bold text-2xl">LexCounsel</span>
             </Link>
             <p className="text-muted-foreground">
-              Expert legal solutions for complex challenges. Protecting your rights
-              and interests since 1998.
+              Expert legal solutions for complex challenges. Protecting your
+              rights and interests since 1998.
             </p>
           </motion.div>
 

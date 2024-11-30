@@ -1,30 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Scale, Briefcase, FileText, Building2, Users2, Globe2 } from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import {
+  Scale,
+  Briefcase,
+  FileText,
+  Building2,
+  Users2,
+  Globe2,
+} from "lucide-react";
 import { CardHoverEffect } from "@/components/ui/card-hover-effect";
 import { AnimatedText } from "@/components/ui/animated-text";
 
 const practiceAreas = [
   {
     title: "Corporate Law",
-    description: "Expert guidance on business formation, mergers, and acquisitions.",
+    description:
+      "Expert guidance on business formation, mergers, and acquisitions.",
     icon: Building2,
   },
   {
     title: "Civil Litigation",
-    description: "Strong representation in complex civil disputes and lawsuits.",
+    description:
+      "Strong representation in complex civil disputes and lawsuits.",
     icon: Scale,
   },
   {
     title: "Contract Law",
-    description: "Comprehensive contract drafting, review, and negotiation services.",
+    description:
+      "Comprehensive contract drafting, review, and negotiation services.",
     icon: FileText,
   },
   {
     title: "Employment Law",
-    description: "Protection of both employer and employee rights and interests.",
+    description:
+      "Protection of both employer and employee rights and interests.",
     icon: Users2,
   },
   {
@@ -68,8 +84,8 @@ export function PracticeAreas() {
             <AnimatedText text="Our Practice Areas" className="inline-block" />
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We offer comprehensive legal services across various practice areas to
-            meet your specific needs.
+            We offer comprehensive legal services across various practice areas
+            to meet your specific needs.
           </p>
         </motion.div>
 

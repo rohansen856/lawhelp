@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -52,7 +52,9 @@ export function Statistics() {
             viewport={{ once: true }}
             className="bg-background rounded-lg p-6 shadow-lg"
           >
-            <h3 className="text-xl font-semibold mb-6">Cases Handled Per Year</h3>
+            <h3 className="text-xl font-semibold mb-6">
+              Cases Handled Per Year
+            </h3>
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data}>

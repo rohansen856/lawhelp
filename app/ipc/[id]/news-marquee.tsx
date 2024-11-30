@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ExternalLink } from "lucide-react"
-import type { NewsItem } from "@/types/law"
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import type { NewsItem } from "./law";
 
 interface NewsMarqueeProps {
   news: NewsItem[];
 }
 
 export function NewsMarquee({ news }: NewsMarqueeProps) {
-  const { scrollYProgress } = useScroll()
-  const translateX = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"])
+  const { scrollYProgress } = useScroll();
+  const translateX = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t">
@@ -35,5 +35,5 @@ export function NewsMarquee({ news }: NewsMarqueeProps) {
         ))}
       </motion.div>
     </div>
-  )
+  );
 }

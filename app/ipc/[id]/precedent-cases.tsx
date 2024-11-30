@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Scale, Calendar, FileText } from "lucide-react"
-import type { PrecedentCase } from "@/types/law"
+import { motion } from "framer-motion";
+import { Scale, Calendar, FileText } from "lucide-react";
+import type { PrecedentCase } from "./law";
 
 interface PrecedentCasesProps {
-  cases: PrecedentCase[]
+  cases: PrecedentCase[];
 }
 
 export function PrecedentCases({ cases }: PrecedentCasesProps) {
@@ -20,7 +20,7 @@ export function PrecedentCases({ cases }: PrecedentCasesProps) {
         <Scale className="w-6 h-6 text-primary" />
         Precedent Cases
       </motion.h2>
-      
+
       <div className="grid gap-6">
         {cases.map((case_, index) => (
           <motion.div
@@ -46,10 +46,12 @@ export function PrecedentCases({ cases }: PrecedentCasesProps) {
                 </span>
               </div>
             </div>
-            <p className="text-muted-foreground leading-relaxed">{case_.summary}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              {case_.summary}
+            </p>
           </motion.div>
         ))}
       </div>
     </section>
-  )
+  );
 }

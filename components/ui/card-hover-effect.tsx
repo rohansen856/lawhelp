@@ -8,7 +8,10 @@ interface CardHoverEffectProps {
   className?: string;
 }
 
-export function CardHoverEffect({ children, className = "" }: CardHoverEffectProps) {
+export function CardHoverEffect({
+  children,
+  className = "",
+}: CardHoverEffectProps) {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -19,7 +22,7 @@ export function CardHoverEffect({ children, className = "" }: CardHoverEffectPro
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     const mouseX = e.clientX - centerX;
     const mouseY = e.clientY - centerY;
 

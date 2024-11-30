@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Calendar, MapPin } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { motion } from "framer-motion";
+import { Calendar, MapPin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface SectionHeaderProps {
   number: string;
@@ -44,5 +44,5 @@ export function SectionHeader({
         <span>Jurisdiction: {jurisdiction}</span>
       </div>
     </motion.div>
-  )
+  );
 }

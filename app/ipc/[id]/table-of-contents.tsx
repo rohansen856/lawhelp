@@ -1,20 +1,23 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 
 interface TableOfContentsProps {
   section: string;
   subsections: { id: string; number: string; text: string }[];
 }
 
-export function TableOfContents({ section, subsections }: TableOfContentsProps) {
+export function TableOfContents({
+  section,
+  subsections,
+}: TableOfContentsProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -47,5 +50,5 @@ export function TableOfContents({ section, subsections }: TableOfContentsProps) 
         </CollapsibleContent>
       </Collapsible>
     </motion.div>
-  )
+  );
 }

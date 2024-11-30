@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
@@ -12,7 +14,8 @@ export function Hero() {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')",
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -58,8 +61,8 @@ export function Hero() {
               transition={{ delay: 0.4 }}
               className="text-xl md:text-2xl mb-8 text-gray-300"
             >
-              Navigate the complexities of law with confidence. Our experienced team
-              is here to protect your rights and interests.
+              Navigate the complexities of law with confidence. Our experienced
+              team is here to protect your rights and interests.
             </motion.p>
 
             <motion.div
@@ -72,7 +75,7 @@ export function Hero() {
                 size="lg"
                 className="text-lg group relative overflow-hidden"
               >
-                <span className="relative z-10">Schedule Consultation</span>
+                <span className="relative z-10">All Section Details</span>
                 <motion.div
                   className="absolute inset-0 bg-primary-foreground opacity-0 group-hover:opacity-10 transition-opacity"
                   initial={false}
@@ -80,13 +83,19 @@ export function Hero() {
                 />
                 <ArrowRight className="ml-2 h-5 w-5 relative z-10" />
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg border-white/20 hover:bg-white/10"
+              <Link
+                href={"/legal-reference"}
+                className={cn(
+                  buttonVariants({
+                    size: "lg",
+                    variant: "outline",
+                    className:
+                      "text-primary text-lg border-white/20 hover:bg-white/10",
+                  }),
+                )}
               >
-                Learn More
-              </Button>
+                Articles
+              </Link>
             </motion.div>
 
             <motion.div
