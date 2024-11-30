@@ -27,7 +27,7 @@ export function Navbar() {
                     <Link href="/" className="flex items-center space-x-2">
                         <Scale className="h-8 w-8 text-primary" />
                         <AnimatedText
-                            text="LexCounsel"
+                            text="LawHelp"
                             className="font-bold text-2xl inline-block"
                         />
                     </Link>
