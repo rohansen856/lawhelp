@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/navbar"
 import { HeroSection } from "./hero-section"
 import { SectionCard } from "./section-card"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
+import Link from "next/link"
 
 const mockSections = [
     {
@@ -48,7 +49,9 @@ export default function IPC() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {mockSections.map((section) => (
-                            <SectionCard key={section.id} section={section} />
+                            <Link href={`/ipc/${section.id}`} key={section.id}>
+                                <SectionCard section={section} />
+                            </Link>
                         ))}
                     </div>
                 </div>
