@@ -18,7 +18,7 @@ export function Navbar() {
         { name: "Practice Areas", href: "/practice-areas" },
         { name: "Our Team", href: "/team" },
         { name: "Resources", href: "/resources" },
-        { name: "Contact", href: "/contact" },
+        { name: "Login", href: "/login" },
     ]
 
     return (
