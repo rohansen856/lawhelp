@@ -127,3 +127,16 @@ In summary, React is more than just a library—it’s a comprehensive toolset f
     '["react", "frontend", "javascript"]'
 );
 
+
+CREATE TABLE ipc (
+    id INT PRIMARY KEY,
+    number VARCHAR(10) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    punishment TEXT NOT NULL,
+    relatedSections TEXT
+);
+
+INSERT INTO ipc (id, number, title, description, punishment, relatedSections)
+VALUES
+(1, '302', 'Punishment for murder', 'Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine.', 'Death or imprisonment for life, and fine', '299, 300, 301');
