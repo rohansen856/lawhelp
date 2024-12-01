@@ -140,3 +140,19 @@ CREATE TABLE ipc (
 INSERT INTO ipc (id, number, title, description, punishment, relatedSections)
 VALUES
 (1, '302', 'Punishment for murder', 'Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine.', 'Death or imprisonment for life, and fine', '299, 300, 301');
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (email, password)
+VALUES 
+('john.doe@example.com', 'hashedpassword123'),
+('jane.doe@example.com', 'hashedpassword456'),
+('sam.smith@example.com', 'hashedpassword789');
+
+
