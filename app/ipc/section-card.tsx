@@ -17,7 +17,7 @@ interface IPCSection {
     title: string
     description: string
     punishment: string
-    relatedSections: string[]
+    relatedSections: string
 }
 
 export function SectionCard({ section }: { section: IPCSection }) {
@@ -68,8 +68,9 @@ export function SectionCard({ section }: { section: IPCSection }) {
                                 Related Sections:
                             </h4>
                             <div className="flex flex-wrap gap-2">
-                                {section.relatedSections.map(
-                                    (relatedSection) => (
+                                {section.relatedSections
+                                    .split(", ")
+                                    .map((relatedSection) => (
                                         <Badge
                                             key={relatedSection}
                                             variant="secondary"
@@ -77,8 +78,7 @@ export function SectionCard({ section }: { section: IPCSection }) {
                                         >
                                             {relatedSection}
                                         </Badge>
-                                    )
-                                )}
+                                    ))}
                             </div>
                         </div>
                     </div>
